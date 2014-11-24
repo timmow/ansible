@@ -1,0 +1,13 @@
+{% if ansible_os_family == 'Darwin' %}
+[hub]
+protocol = https
+host = github.gds
+
+[credential]
+helper = /opt/boxen/bin/boxen-git-credential
+
+[core]
+excludesfile = /opt/boxen/config/git/gitignore
+{% endif %}
+[user]
+	email = timothy.mower@gmail.com
