@@ -1,0 +1,4 @@
+# file: group_vars/osx.yml
+---
+timmow:
+  home: /Users/timothymower

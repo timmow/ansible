@@ -1,0 +1,31 @@
+# file: group_vars/dotfile_repos.yaml
+---
+dotfiles:
+  timmow:
+    git:
+      repos:
+        - name: vimrc
+          repo: "git://github.com/timmow/vimrc.git"
+          dest: "{{ timmow.home }}/.vimfiles"
+        - name: zshrc
+          repo: "git://github.com/timmow/zshrc.git"
+          dest: "{{ timmow.home }}/.zshrcrepo"
+        - name: slaterc
+          repo: "git://github.com/timmow/slaterc.git"
+          dest: "{{ timmow.home }}/.slaterc"
+        - name: ohmyzsh
+          repo: "git://github.com/robbyrussell/oh-my-zsh.git"
+          dest: "{{ timmow.home }}/.oh-my-zsh"
+    symlinks:
+      - src: "{{ timmow.home }}/.vimfiles/_vimrc"
+        dst: "{{ timmow.home }}/.vimrc"
+      - src: "{{ timmow.home }}/.vimfiles/vimfiles"
+        dst: "{{ timmow.home }}/.vim"
+      - src: "{{ timmow.home }}/.zshrcrepo/home/.zshrc"
+        dst: "{{ timmow.home }}/.zshrc"
+      - src: "{{ timmow.home }}/.zshrcrepo/home/timmower.zsh-theme"
+        dst: "{{ timmow.home }}/.oh-my-zsh/themes/timmower.zsh-theme"
+      - src: "{{ timmow.home }}/.zshrcrepo/home/.zsh_aliases"
+        dst: "{{ timmow.home }}/.zsh_aliases"
+      - src: "{{ timmow.home }}/.slaterc/home/.slate"
+        dst: "{{ timmow.home }}/.slate"
