@@ -29,3 +29,5 @@ dotfiles:
         dst: "{{ timmow.home }}/.zsh_aliases"
       - src: "{{ timmow.home }}/.slaterc/home/.slate"
         dst: "{{ timmow.home }}/.slate"
+      - src: "{{ timmow.home }}/src/ansible/roles/dotfiles/files/Vagrantfile"
+        dst: "{{ timmow.home }}/.vagrant.d/Vagrantfile"
