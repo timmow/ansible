@@ -10,4 +10,8 @@ helper = /opt/boxen/bin/boxen-git-credential
 excludesfile = /opt/boxen/config/git/gitignore
 {% endif %}
 [user]
-	email = timothy.mower@gmail.com
+email = timothy.mower@gmail.com
+[color]
+ui = true
+[core]
+pager = less -FRSX
