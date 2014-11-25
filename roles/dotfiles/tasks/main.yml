@@ -10,6 +10,11 @@
   file: path="{{ timmow.home }}/tmp" state=directory
 - name: vagrant_dir
   file: path="{{ timmow.home }}/.vagrant.d" state=directory
+- name: link dotfiles
+  file: src={{ item }} dest={{timmow.home}}/.{{ item | basename }} state=link
+  with_fileglob:
+    - ./simple/*
+  tags: dotfiles
 
 - name: git config template
   template: src="gitconfig" dest={{timmow.home}}/.gitconfig
