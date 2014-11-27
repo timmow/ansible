@@ -1,0 +1,36 @@
+# file: group_vars/dotfile_repos.yaml
+---
+dotfiles:
+  timmow:
+    git:
+      repos:
+        - name: vimrc
+          repo: "git://github.com/timmow/vimrc.git"
+          dest: "~/.vimfiles"
+        - name: zshrc
+          repo: "git@github.com:timmow/zshrc.git"
+          dest: "~/.zshrcrepo"
+        - name: slaterc
+          repo: "git://github.com/timmow/slaterc.git"
+          dest: "~/.slaterc"
+        - name: ohmyzsh
+          repo: "git://github.com/robbyrussell/oh-my-zsh.git"
+          dest: "~/.oh-my-zsh"
+        - name: ansible
+          repo: "git@github.com:timmow/ansible.git"
+          dest: "~/src/ansible"
+    symlinks:
+      - src: "~/.vimfiles/_vimrc"
+        dst: "~/.vimrc"
+      - src: "~/.vimfiles/vimfiles"
+        dst: "~/.vim"
+      - src: "~/.zshrcrepo/home/.zshrc"
+        dst: "~/.zshrc"
+      - src: "~/.zshrcrepo/home/timmower.zsh-theme"
+        dst: "~/.oh-my-zsh/themes/timmower.zsh-theme"
+      - src: "~/.zshrcrepo/home/.zsh_aliases"
+        dst: "~/.zsh_aliases"
+      - src: "~/.slaterc/home/.slate"
+        dst: "~/.slate"
+      - src: "~/src/ansible/roles/dotfiles/files/Vagrantfile"
+        dst: "~/.vagrant.d/Vagrantfile"

@@ -1,20 +1,22 @@
 ---
 - name: Git Repos
-  git: repo={{ item.repo }} dest={{ item.dest }}
+  git: repo={{ item.repo }} dest={{ item.dest }} accept_hostkey=yes force=no
   with_items: dotfiles.timmow.git.repos
   tags: dotfiles
+- name: vagrant_dir
+  file: path="~/.vagrant.d" state=directory
+- name: src_dir
+  file: path="~/src" state=directory
 - name: dotfile repos symlinks
   file: src={{ item.src }} dest={{ item.dst }} state=link
   with_items: dotfiles.timmow.symlinks
 - name: tmp_dir
-  file: path="{{ timmow.home }}/tmp" state=directory
-- name: vagrant_dir
-  file: path="{{ timmow.home }}/.vagrant.d" state=directory
+  file: path="~/tmp" state=directory
 - name: link dotfiles
-  file: src={{ item }} dest={{timmow.home}}/.{{ item | basename }} state=link
+  file: src=~/src/ansible/roles/dotfiles/files/simple/{{ item | basename }} dest=~/.{{ item | basename }} state=link
   with_fileglob:
     - ./simple/*
   tags: dotfiles
 
 - name: git config template
-  template: src="gitconfig" dest={{timmow.home}}/.gitconfig
+  template: src="gitconfig" dest=~/.gitconfig
