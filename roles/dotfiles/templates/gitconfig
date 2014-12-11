@@ -15,3 +15,5 @@ email = timothy.mower@gmail.com
 ui = true
 [core]
 pager = less -FRSX
+[branch]
+autosetuprebase = always
