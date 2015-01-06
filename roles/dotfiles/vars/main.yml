@@ -26,6 +26,8 @@ dotfiles:
         dst: "~/.vim"
       - src: "~/.zshrcrepo/home/.zshrc"
         dst: "~/.zshrc"
+      - src: "~/.zshrcrepo/home/.zshenv"
+        dst: "~/.zshenv"
       - src: "~/.zshrcrepo/home/timmower.zsh-theme"
         dst: "~/.oh-my-zsh/themes/timmower.zsh-theme"
       - src: "~/.zshrcrepo/home/.zsh_aliases"
