@@ -9,4 +9,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "#{ENV['HOME']}/src/ansible/site.yml"
     ansible.verbose = 'vvv'
   end
+  config.vm.provision :shell do |shell|
+    shell.inline = "sudo chsh -s /bin/bash vagrant"
+    shell.inline = "echo 'vagrant' > /home/vagrant/.box_name"
+  end
 end
