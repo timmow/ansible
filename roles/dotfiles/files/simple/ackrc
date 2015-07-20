@@ -1,0 +1,6 @@
+--ignore-dir=.ropeproject
+--ignore-dir=vendor
+--ignore-dir=.tmp
+--ignore-file=is:nosetests.xml
+--ignore-file=is:.coverage
+--type-add=pp:ext:pp
