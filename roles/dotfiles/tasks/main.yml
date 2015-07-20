@@ -5,6 +5,7 @@
   git: repo={{ item.repo }} dest={{ item.dest }} accept_hostkey=yes force=no
   with_items: dotfiles.timmow.git.repos
   tags: dotfiles
+  ignore_errors: yes
 - name: vagrant_dir
   file: path="~/.vagrant.d" state=directory
 - name: src_dir
