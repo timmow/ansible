@@ -4,4 +4,6 @@
   with_items: 
     - git
     - zsh
+    - ack-grep
+    - mercurial
   sudo: yes
