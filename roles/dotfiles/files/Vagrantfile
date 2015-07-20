@@ -5,6 +5,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "vmware_fusion" do |v|
     v.vmx["memsize"] = "2048"
     v.vmx["numvcpus"] = "2"
+    # v.gui = true
   end
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "#{ENV['HOME']}/src/ansible/site.yml"
