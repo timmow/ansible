@@ -1,6 +1,7 @@
 ---
 - include: ubuntu.yml
   when: ansible_os_family == "Debian"
+  tags: sudo
 - name: Git Repos
   git: repo={{ item.repo }} dest={{ item.dest }} accept_hostkey=yes force=no
   with_items: dotfiles.timmow.git.repos
