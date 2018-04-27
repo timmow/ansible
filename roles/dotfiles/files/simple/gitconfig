@@ -1,0 +1,10 @@
+[user]
+email = timothy.mower@gmail.com
+[color]
+ui = true
+[core]
+pager = less -FRSX
+[branch]
+autosetuprebase = always
+[rebase]
+	autosquash = true

@@ -21,6 +21,3 @@
   with_fileglob:
     - ./simple/*
   tags: dotfiles
-
-- name: git config template
-  template: src="gitconfig" dest=~/.gitconfig
