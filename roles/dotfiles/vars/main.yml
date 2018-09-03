@@ -19,6 +19,9 @@ dotfiles:
         - name: ansible
           repo: "git://github.com/timmow/ansible.git"
           dest: "~/src/ansible"
+        - name: tpm
+          repo: "https://github.com/tmux-plugins/tpm"
+          dest: "~/.tmux/plugins/tpm"
     symlinks:
       - src: "~/.vimfiles/_vimrc"
         dst: "~/.vimrc"
