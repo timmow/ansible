@@ -1,0 +1,5 @@
+- name: install fasd
+  shell: PREFIX=$HOME make install
+  args:
+    chdir: "~/src/fasd"
+

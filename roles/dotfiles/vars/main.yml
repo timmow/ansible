@@ -22,6 +22,9 @@ dotfiles:
         - name: tpm
           repo: "https://github.com/tmux-plugins/tpm"
           dest: "~/.tmux/plugins/tpm"
+        - name: fasd
+          repo: "https://github.com/clvv/fasd"
+          dest: "~/src/fasd"
     symlinks:
       - src: "~/.vimfiles/_vimrc"
         dst: "~/.vimrc"
