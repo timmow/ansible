@@ -23,3 +23,8 @@
   with_fileglob:
     - ./simple/*
   tags: dotfiles
+- name: git deploy
+  get_url:
+    url: https://raw.githubusercontent.com/ipwnponies/dotfiles/master/bin/git-deploy
+    dest: ~/bin/git-deploy
+    mode: 0755
