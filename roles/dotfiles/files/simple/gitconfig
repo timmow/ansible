@@ -8,3 +8,10 @@ pager = less -FRSX
 autosetuprebase = always
 [rebase]
 	autosquash = true
+	autoStash = true
+[credential]
+	helper = !aws codecommit credential-helper $@
+	UseHttpPath = true
+[alias]
+	rgrep = !git grep
+	rg    = !rg
