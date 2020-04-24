@@ -23,6 +23,9 @@
   with_fileglob:
     - ./simple/*
   tags: dotfiles
+- name: bindir
+  file:
+    path: ~/bin
 - name: git deploy
   get_url:
     url: https://raw.githubusercontent.com/ipwnponies/dotfiles/master/bin/git-deploy
