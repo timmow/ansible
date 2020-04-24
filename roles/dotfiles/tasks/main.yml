@@ -6,7 +6,7 @@
   when: ansible_os_family == "Debian"
 - name: Git Repos
   git: repo={{ item.repo }} dest={{ item.dest }} accept_hostkey=yes force=no
-  with_items: dotfiles.timmow.git.repos
+  with_items: "{{dotfiles.timmow.git.repos}}"
   tags: dotfiles
   ignore_errors: yes
 - name: vagrant_dir
@@ -15,7 +15,7 @@
   file: path="~/src" state=directory
 - name: dotfile repos symlinks
   file: src={{ item.src }} dest={{ item.dst }} state=link
-  with_items: dotfiles.timmow.symlinks
+  with_items: "{{dotfiles.timmow.symlinks}}"
 - name: tmp_dir
   file: path="~/tmp" state=directory
 - name: link dotfiles
