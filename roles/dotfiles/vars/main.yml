@@ -22,6 +22,9 @@ dotfiles:
         - name: fasd
           repo: "https://github.com/clvv/fasd"
           dest: "~/src/fasd"
+        - name: p10k
+          repo: "https://github.com/romkatv/powerlevel10k"
+          dest: "~/.oh-my-zsh/custom/themes/powerlevel10k"
     symlinks:
       - src: "~/.vimfiles/_vimrc"
         dst: "~/.vimrc"
