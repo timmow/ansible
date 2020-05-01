@@ -4,6 +4,7 @@ email = timothy.mower@gmail.com
 ui = true
 [core]
 pager = less -FRSX
+	excludesfile = ~/.gitignore
 [branch]
 autosetuprebase = always
 [rebase]
