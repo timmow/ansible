@@ -1,0 +1,28 @@
+alias dss='dig +search +short'
+alias 'svn up'='echo "use devhost 9"'
+alias 'svn sw'='echo "use devhost 9"'
+alias curla='curl -I -H '\''Pragma: akamai-x-cache-on, akamai-x-cache-remote-on, akamai-x-check-cacheable, akamai-x-get-cache-key, akamai-x-get-extracted-values, akamai-x-get-nonces ,akamai-x-get-ssl-client-session-id, akamai-x-get-true-cache-key, akamai-x-serial-no'\'''
+alias curlh='curl -o /dev/null -D - -s'
+alias http='nocorrect http'
+alias rbenv='nocorrect rbenv'
+alias mvim='vimer'
+alias sml='rlwrap sml'
+alias vagrant='/usr/bin/vagrant'
+alias tmux='tmux -2'
+alias gpoh='git push origin HEAD'
+alias hpr='hub pull-request'
+alias mkdirvirtualenv='mkvirtualenv $(basename $PWD)'
+alias unsafe_ssh="ssh -o 'StrictHostKeyChecking=no' -o 'UserKnownHostsFile=/dev/null'"
+alias ag="ag --ignore-dir=vendor --ignore-dir=playground --ignore='*.tfstate*'"
+alias fixssh='export $(tmux show-environment | grep \^SSH_AUTH_SOCK=)'
+alias cdroot='cd $(git rev-parse --show-toplevel)'
+if type vim8 > /dev/null; then
+	alias vim=vim8
+	export VISUAL=vim8
+	export EDITOR="$VISUAL"
+fi
+if type nvim > /dev/null; then
+	alias vim=nvim
+	export VISUAL=nvim
+	export EDITOR="$VISUAL"
+fi
