@@ -4,6 +4,18 @@
   tags: sudo
 - include: ubuntu_unprivileged.yml
   when: ansible_os_family == "Debian"
+- name: Create a repo if it does not exist
+  with_items: "{{dotfiles.timmow.git.repos}}"
+  file:
+    path: "{{ item.dest }}"
+    state: directory
+    mode: '0755'
+- name: Check Git Repos
+  shell: "if [[ $(git rev-list  --count origin/master...master) -ne 0 ]]; then exit 1; fi"
+  args:
+    chdir: "{{ item.dest }}"
+  with_items: "{{dotfiles.timmow.git.repos}}"
+  tags: dotfiles
 - name: Git Repos
   git: repo={{ item.repo }} dest={{ item.dest }} accept_hostkey=yes force=no
   with_items: "{{dotfiles.timmow.git.repos}}"
