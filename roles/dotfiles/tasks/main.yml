@@ -9,6 +9,14 @@
   with_items: "{{dotfiles.timmow.git.repos}}"
   tags: dotfiles
   ignore_errors: yes
+- name: Git Repos config
+  git_config:
+    name: remote.origin.pushurl
+    repo: "{{ item.dest }}"
+    scope: local
+    value: "{{ item.repo | regex_replace('://([^/]*)/', '@\\1:') }}"
+  with_items: "{{dotfiles.timmow.git.repos}}"
+  tags: dotfiles
 - name: vagrant_dir
   file: path="~/.vagrant.d" state=directory
 - name: src_dir
