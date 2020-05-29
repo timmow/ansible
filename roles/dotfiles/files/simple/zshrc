@@ -41,26 +41,8 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh_aliases
 command -v brew >/dev/null 2>&1 && fpath=($fpath $(brew --prefix)/share/zsh-completions)
 
-
 setopt interactive_comments
 setopt dotglob
-
-# Customize to your needs...
-cdpath=(. /sites/personaldev/tmower) 
-
-function extractrpm
-{
-	if [ ! -z $1 ]; then
-		rpm2cpio $1 | cpio -idmv
-	fi
-}
-
-function publish_dashboard
-{
-	if [ ! -z $1 ]; then
-		sh -c "cd ~/src/fabric-scripts && ~/.virtualenvs/fabric-scripts/bin/fab production performanceplatform.publish_dashboard:$1"
-	fi
-}
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 fpath=($HOME/.zsh/func $fpath)
@@ -73,26 +55,6 @@ export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 GPG_TTY=`tty`
 export GPG_TTY
-
-if [[ -a ~/.secrets ]]; then
-    source ~/.secrets
-fi
-
-compdef _pass paas-pass
-zstyle ':completion::complete:paas-pass::' prefix "$HOME/.paas-pass"
-paas-pass() {
-  PASSWORD_STORE_DIR=$HOME/.paas-pass pass $@
-}
-
-compdef _pass paas-pass-high
-zstyle ':completion::complete:paas-pass-high::' prefix "$HOME/.paas-pass-high"
-paas-pass-high() {
-  PASSWORD_STORE_DIR=$HOME/.paas-pass-high pass $@
-}
-
-function creds() {
-        $(pass aws/$1/credentials.sh) && ~/src/paas-cf/scripts/create_sts_token.sh && source ~/.aws_sts_tokens/$1.sh
-}
 
 function update_repo() {
         (cd $1 && git pull)
