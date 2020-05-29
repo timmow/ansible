@@ -2,8 +2,6 @@
 - include: ubuntu.yml
   when: ansible_os_family == "Debian"
   tags: sudo
-- include: ubuntu_unprivileged.yml
-  when: ansible_os_family == "Debian"
 - name: Create a repo if it does not exist
   with_items: "{{dotfiles.timmow.git.repos}}"
   file:
@@ -29,6 +27,8 @@
     value: "{{ item.repo | regex_replace('://([^/]*)/', '@\\1:') }}"
   with_items: "{{dotfiles.timmow.git.repos}}"
   tags: dotfiles
+- include: ubuntu_unprivileged.yml
+  when: ansible_os_family == "Debian"
 - name: vagrant_dir
   file: path="~/.vagrant.d" state=directory
 - name: config_dir
