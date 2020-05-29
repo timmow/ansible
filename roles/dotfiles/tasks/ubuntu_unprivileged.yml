@@ -2,4 +2,14 @@
   shell: PREFIX=$HOME make install
   args:
     chdir: "~/src/fasd"
+- name: install zsh local
+  file:
+    src: ~/src/ansible/roles/dotfiles/files/ubuntu_unprivileged/zshenv_local
+    dest: ~/.zshenv_local
+    state: link
+- name: linuxbrew
+  git:
+    repo: https://github.com/Homebrew/brew
+    dest: ~/.linuxbrew
+    accept_hostkey: yes
 
