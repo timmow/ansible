@@ -44,7 +44,6 @@ command -v brew >/dev/null 2>&1 && fpath=($fpath $(brew --prefix)/share/zsh-comp
 setopt interactive_comments
 setopt dotglob
 
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 fpath=($HOME/.zsh/func $fpath)
 typeset -U fpath
 export PAGER=less
