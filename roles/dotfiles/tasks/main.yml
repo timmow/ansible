@@ -31,6 +31,15 @@
   tags: dotfiles
 - name: vagrant_dir
   file: path="~/.vagrant.d" state=directory
+- name: config_dir
+  file: path="~/.config" state=directory
+- name: nvim_config_dir
+  file: path="~/.config/nvim" state=directory
+- name: nvim config symlinik
+  file:
+    src: ~/src/ansible/roles/dotfiles/files/config/nvim/init.vim
+    dest: ~/.config/nvim/init.vim
+    state: link
 - name: src_dir
   file: path="~/src" state=directory
 - name: dotfile repos symlinks
