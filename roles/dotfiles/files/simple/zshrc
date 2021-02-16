@@ -64,6 +64,10 @@ fi
 typeset -aU path
 
 function gi() { curl -sLw n https://www.gitignore.io/api/$@ ;}
+if [[ -n $TMUX ]]; then
+  export NVIM_LISTEN_ADDRESS=${HOME}/tmp/socket/nvim_$(tmux display -p "#{window_id}")
+fi
+
 export LESS="--quit-if-one-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
