@@ -64,6 +64,10 @@ fi
 typeset -aU path
 
 function gi() { curl -sLw n https://www.gitignore.io/api/$@ ;}
+function clean_aws_vars() {
+  env | grep aws -i | awk -F= '{print $1}' | while read var; do unset $var; done
+}
+
 if [[ -n $TMUX ]]; then
   export NVIM_LISTEN_ADDRESS=${HOME}/tmp/socket/nvim_$(tmux display -p "#{window_id}")
 fi
