@@ -16,3 +16,4 @@ autosetuprebase = always
 [alias]
 	rgrep = !git grep
 	rg    = !rg
+	cleanup = "!git branch --merged master | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
