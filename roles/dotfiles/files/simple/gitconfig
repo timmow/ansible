@@ -3,7 +3,7 @@ email = timothy.mower@gmail.com
 [color]
 ui = true
 [core]
-pager = less -FRSX
+	pager = less
 	excludesfile = ~/.gitignore
 [branch]
 autosetuprebase = always
