@@ -3,7 +3,7 @@ email = timothy.mower@gmail.com
 [color]
 ui = true
 [core]
-	pager = less
+	pager = delta
 	excludesfile = ~/.gitignore
 [branch]
 autosetuprebase = always
@@ -16,4 +16,18 @@ autosetuprebase = always
 [alias]
 	rgrep = !git grep
 	rg    = !rg
+	fd    = !fd
 	cleanup = "!git branch --merged master | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = line-numbers decorations
+    whitespace-error-style = 22 reverse
+    width = 250
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
