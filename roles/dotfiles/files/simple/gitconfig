@@ -5,6 +5,7 @@ ui = true
 [core]
 	pager = delta
 	excludesfile = ~/.gitignore
+	editor = nvr --remote-wait-silent
 [branch]
 autosetuprebase = always
 [rebase]
