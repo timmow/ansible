@@ -24,7 +24,7 @@
     name: remote.origin.pushurl
     repo: "{{ item.dest }}"
     scope: local
-    value: "{{ item.repo | regex_replace('://([^/]*)/', '@\\1:') }}"
+    value: "{{ item.repo | regex_replace('https://github.com/timmow', 'git@github.com:timmow') }}"
   with_items: "{{dotfiles.timmow.git.repos}}"
   tags: dotfiles
 - include: ubuntu_unprivileged.yml

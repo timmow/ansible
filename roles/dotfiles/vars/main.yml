@@ -5,16 +5,13 @@ dotfiles:
     git:
       repos:
         - name: vimrc
-          repo: "git://github.com/timmow/vimrc.git"
+          repo: "https://github.com/timmow/vimrc.git"
           dest: "~/.vimfiles"
-        - name: slaterc
-          repo: "git://github.com/timmow/slaterc.git"
-          dest: "~/.slaterc"
         - name: ohmyzsh
-          repo: "git://github.com/robbyrussell/oh-my-zsh.git"
+          repo: "https://github.com/robbyrussell/oh-my-zsh.git"
           dest: "~/.oh-my-zsh"
         - name: ansible
-          repo: "git://github.com/timmow/ansible.git"
+          repo: "https://github.com/timmow/ansible.git"
           dest: "~/src/ansible"
         - name: tpm
           repo: "https://github.com/tmux-plugins/tpm"
@@ -36,7 +33,5 @@ dotfiles:
         dst: "~/.vimrc"
       - src: "~/.vimfiles/vimfiles"
         dst: "~/.vim"
-      - src: "~/.slaterc/home/.slate"
-        dst: "~/.slate"
       - src: "~/src/ansible/roles/dotfiles/files/Vagrantfile"
         dst: "~/.vagrant.d/Vagrantfile"
