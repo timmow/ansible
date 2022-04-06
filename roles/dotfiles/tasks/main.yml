@@ -9,7 +9,9 @@
     state: directory
     mode: '0755'
 - name: Check Git Repos
-  shell: "if [[ $(git rev-list  --count origin/master...master) -ne 0 ]]; then exit 1; fi"
+  command: "git rev-list \"@{upstream}\"...HEAD"
+  register: cmd
+  failed_when: cmd.stdout != ""
   args:
     chdir: "{{ item.dest }}"
   with_items: "{{dotfiles.timmow.git.repos}}"
