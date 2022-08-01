@@ -38,6 +38,11 @@ DISABLE_AUTO_TITLE="true"
 plugins=(gitfast git brew fasd tmux virtualenv zsh-vim-mode)
 export CLICOLOR=1
 source $ZSH/oh-my-zsh.sh
+for ve in rbenv pyenv; do
+    if type ${ve} &> /dev/null; then
+        eval "$(${ve} init -)"
+    fi
+done
 source ~/.zsh_aliases
 command -v brew >/dev/null 2>&1 && fpath=($fpath $(brew --prefix)/share/zsh-completions)
 
@@ -61,7 +66,7 @@ function update_repo() {
 if which aactivator >/dev/null 2>&1; then
     eval "$(aactivator init)"
 fi
-typeset -aU path
+typeset -U path
 
 function gi() { curl -sLw n https://www.gitignore.io/api/$@ ;}
 function clean_aws_vars() {
@@ -82,3 +87,11 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 compdef diff delta
 autoload -U compinit && compinit
+
+export GOPATH=~/.go
+[[ ! -f ~/.zshenv_local ]] || source ~/.zshenv_local
+path=("${KREW_ROOT:-$HOME/.krew}/bin" "$HOME/.local/bin" "$GOPATH/bin" "$HOME/bin" "/usr/local/sbin" "/usr/local/bin" $path)
+# export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:$PATH"
+export PATH
+test -e "${HOME}/.zsh_local" && source "${HOME}/.zsh_local"
+eval "$(direnv hook zsh)"
