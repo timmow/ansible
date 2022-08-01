@@ -53,7 +53,7 @@
   file: src=~/src/ansible/roles/dotfiles/files/simple/{{ item | basename }} dest=~/.{{ item | basename }} state=link
   with_fileglob:
     - ./simple/*
-  tags: dotfiles
+  tags: dotfiles,link
 - name: bindir
   file:
     path: ~/bin

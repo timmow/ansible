@@ -93,5 +93,6 @@ export GOPATH=~/.go
 path=("${KREW_ROOT:-$HOME/.krew}/bin" "$HOME/.local/bin" "$GOPATH/bin" "$HOME/bin" "/usr/local/sbin" "/usr/local/bin" $path)
 # export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:$PATH"
 export PATH
+test -e "${HOME}/.ripgreprc" && export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 test -e "${HOME}/.zsh_local" && source "${HOME}/.zsh_local"
 eval "$(direnv hook zsh)"

@@ -1,2 +1,2 @@
 --type-add
-*.{jsonnet,libsonnet}
+jsonnet:*.{jsonnet,libsonnet}
