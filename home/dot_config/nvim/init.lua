@@ -167,38 +167,9 @@ end
 local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig.configs'
 
-if not configs.pyls then
-configs.pyls = {
+require('lspconfig')['pyright'].setup {}
 
-  default_config = {
-    cmd = { 'pyls' },
-    filetypes = { 'python' },
-    root_dir = function(fname)
-      return vim.fn.getcwd()
-    end,
-  },
-  docs = {
-    package_json = 'https://raw.githubusercontent.com/palantir/python-language-server/develop/vscode-client/package.json',
-    description = [[
-https://github.com/palantir/python-language-server
-`python-language-server`, a language server for Python.
-The language server can be installed via `pipx install 'python-language-server[all]'`.
-    ]],
-    default_config = {
-      root_dir = "vim's starting directory",
-    },
-  },
-}
-end
-  lspconfig['pyls'].setup {}
 
-  require('lspconfig').pyls.setup {
-    cmd = { 'pyls' },
-    filetypes = { 'python' },
-    root_dir = function(fname)
-      return vim.fn.getcwd()
-    end,
-  }
 require('lspconfig')['jsonnet_ls'].setup {
   on_attach = on_attach,
   cmd = {
