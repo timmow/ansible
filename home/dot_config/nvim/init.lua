@@ -4,6 +4,18 @@ let &packpath = &runtimepath
 source ~/.vimrc
 ]])
 
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 -- require('mason.settings').set({
 --  pip = {
 --         -- These args will be added to `pip install` calls. Note that setting extra args might impact intended behavior
