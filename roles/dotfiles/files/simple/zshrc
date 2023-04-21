@@ -34,7 +34,7 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(gitfast git brew fasd tmux virtualenv zsh-vim-mode)
+plugins=(gitfast git brew fasd tmux virtualenv zsh-vim-mode fzf)
 export CLICOLOR=1
 source $ZSH/oh-my-zsh.sh
 for ve in rbenv pyenv; do
@@ -89,7 +89,7 @@ autoload -U compinit && compinit
 
 export GOPATH=~/.go
 [[ ! -f ~/.zshenv_local ]] || source ~/.zshenv_local
-path=("${KREW_ROOT:-$HOME/.krew}/bin" "$HOME/.local/bin" "$GOPATH/bin" "$HOME/bin" "/usr/local/sbin" "/usr/local/bin" $path)
+path=("${KREW_ROOT:-$HOME/.krew}/bin" "$HOME/.npm-prefix/bin" "$HOME/.local/bin" "$GOPATH/bin" "$HOME/bin" "/usr/local/sbin" "/usr/local/bin" $path)
 # export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:$PATH"
 export PATH
 test -e "${HOME}/.ripgreprc" && export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
