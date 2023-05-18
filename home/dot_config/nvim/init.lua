@@ -104,6 +104,7 @@ end
     
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
+      { name = 'nvim_lsp_signature_help' },
   --    { name = 'vsnip' }, -- For vsnip users.
       { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
@@ -154,7 +155,9 @@ end
 
   local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
+  vim.lsp.set_log_level('debug')
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -179,7 +182,13 @@ end
 local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig.configs'
 
-require('lspconfig')['pyright'].setup {}
+require('lspconfig')['pyright'].setup {
+  capabilities = capabilities,
+}
+
+require('lspconfig')['pylsp'].setup {
+  capabilities = capabilities,
+}
 
 
 require('lspconfig')['jsonnet_ls'].setup {
