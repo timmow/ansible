@@ -1,5 +1,5 @@
 ---
-- include: ubuntu.yml
+- include_tasks: ubuntu.yml
   when: ansible_os_family == "Debian"
   tags: sudo
 - name: Create a repo if it does not exist
@@ -7,9 +7,9 @@
   file:
     path: "{{ item.dest }}"
     state: directory
-    mode: '0755'
+    mode: "0755"
 - name: Check Git Repos
-  command: "git rev-list \"@{upstream}\"...HEAD"
+  command: 'git rev-list "@{upstream}"...HEAD'
   register: cmd
   failed_when: cmd.stdout != ""
   args:
@@ -29,7 +29,7 @@
     value: "{{ item.repo | regex_replace('https://github.com/timmow', 'git@github.com:timmow') }}"
   with_items: "{{dotfiles.timmow.git.repos}}"
   tags: dotfiles
-- include: ubuntu_unprivileged.yml
+- include_tasks: ubuntu_unprivileged.yml
   when: ansible_os_family == "Debian"
 - name: vagrant_dir
   file: path="~/.vagrant.d" state=directory
