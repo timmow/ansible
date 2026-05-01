@@ -1,41 +1,41 @@
 [user]
-email = timothy.mower@gmail.com
+  email = timothy.mower@gmail.com
 [color]
-ui = true
+  ui = true
 [core]
-	pager = delta
-	excludesfile = ~/.gitignore
-	editor = nvr --remote-wait-silent
+  pager = delta
+  excludesfile = ~/.gitignore
+  editor = nvr --remote-wait-silent
 [branch]
-autosetuprebase = always
+  autosetuprebase = always
 [rebase]
-	autosquash = true
-	autoStash = true
+  autosquash = true
+  autoStash = true
 [credential]
-	helper = !aws codecommit credential-helper $@
-	UseHttpPath = true
+  helper = !aws codecommit credential-helper $@
+  UseHttpPath = true
 [alias]
-	rgrep = !git grep
-	rg    = !rg
-	fd    = !fd
-	cleanup = "!git branch --merged master | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  rgrep = !git grep
+  rg    = !rg
+  fd    = !fd
+  cleanup = "!git branch --merged master | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
 
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
-    features = line-numbers decorations
-    whitespace-error-style = 22 reverse
-    width = 250
-    side-by-side = true
-    navigate = true
+  features = line-numbers decorations
+  whitespace-error-style = 22 reverse
+  width = 250
+  side-by-side = true
+  navigate = true
 
 [delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
 [pull]
-	rebase = true
+  rebase = true
 
 # define command which will be used when "nvim" is set as a merge tool
 [mergetool "nvim"]
@@ -47,4 +47,4 @@ autosetuprebase = always
 [mergetool]
   prompt = false
 [push]
-	default = simple
+  default = simple
