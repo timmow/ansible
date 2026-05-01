@@ -11,9 +11,6 @@
 [rebase]
   autosquash = true
   autoStash = true
-[credential]
-  helper = !aws codecommit credential-helper $@
-  UseHttpPath = true
 [alias]
   rgrep = !git grep
   rg    = !rg
@@ -48,3 +45,14 @@
   prompt = false
 [push]
   default = simple
+[gpg]
+  format = ssh
+{{- $signingHosts := list "Tims-MacBook-Air-2" -}}
+{{- if or (has .chezmoi.hostname $signingHosts) (has .chezmoi.fqdnHostname $signingHosts) }}
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[user]
+  signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFVv72ua2IAB8YrA6G8yUo0YiiCuvafLYDDC2Bw2Bja3
+[commit]
+  gpgsign = true
+{{- end }}
