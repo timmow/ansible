@@ -67,6 +67,18 @@ Then pull the changes into `~/src/ansible` if needed:
 cd ~/src/ansible && git pull
 ```
 
+When testing or debugging chezmoi-managed dotfiles, remember that `chezmoi diff`, `chezmoi apply`, and `chezmoi data` operate on the separate source checkout in `~/.local/share/chezmoi/`, not the repo copy in `~/src/ansible`. If you edit files under `~/src/ansible/home/`, sync those changes into `~/.local/share/chezmoi/` before relying on `chezmoi diff` or `chezmoi apply`.
+
+If a chezmoi template depends on host identity, verify the actual values from `chezmoi data` rather than assuming the current machine name. Useful checks:
+
+```bash
+chezmoi data | rg 'hostname|fqdnHostname'
+hostname
+hostname -s
+```
+
+On macOS, `ComputerName`, `LocalHostName`, `HostName`, and the shell hostname may differ.
+
 ## Testing Changes
 
 After modifying roles or tasks, run the playbook to verify changes. The playbook is idempotent and safe to run multiple times. Check for git repo status before running to avoid uncommitted changes being overwritten (the playbook checks this with `git rev-list "@{upstream}"...HEAD`).
