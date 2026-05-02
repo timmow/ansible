@@ -47,7 +47,7 @@
   default = simple
 [gpg]
   format = ssh
-{{- $signingHosts := list "Tims-MacBook-Air-2" -}}
+{{- $signingHosts := list "Tims-MacBook-Air-2" "Mac" "Mac.lan" -}}
 {{- if or (has .chezmoi.hostname $signingHosts) (has .chezmoi.fqdnHostname $signingHosts) }}
 [gpg "ssh"]
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
