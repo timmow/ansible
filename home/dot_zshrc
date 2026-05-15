@@ -53,7 +53,7 @@ command -v brew >/dev/null 2>&1 && fpath=($fpath $(brew --prefix)/share/zsh-comp
 setopt interactive_comments
 setopt dotglob
 
-fpath=($HOME/.zsh/func $fpath)
+fpath=($HOME/.zsh/func $HOME/.oh-my-zsh/custom/completions $fpath)
 typeset -U fpath
 export PAGER=less
 mcd() { mkdir -p "$@" && cd "$_"; }
