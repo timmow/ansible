@@ -1,0 +1,115 @@
+#!/usr/bin/env python3
+"""
+Chezmoi modify_ script for ~/.claude/settings.json
+
+Merges canonical settings, work settings (from a private repo), and the
+existing live file. Source settings win for structure; permissions are
+unioned so nothing is lost. $HOME placeholders are expanded at apply time.
+"""
+import json
+import os
+import sys
+from pathlib import Path
+
+
+def expand_home(s, home):
+    """Expand $HOME and fix the triple-slash that results from //$HOME/..."""
+    return s.replace("$HOME", home).replace("///", "//")
+
+
+def deep_merge(base, overlay):
+    result = base.copy()
+    for k, v in overlay.items():
+        if k in result and isinstance(result[k], dict) and isinstance(v, dict):
+            result[k] = deep_merge(result[k], v)
+        else:
+            result[k] = v
+    return result
+
+
+def merge_hooks(canonical, work):
+    """Concatenate hook arrays from both sources, deduping by matcher+command."""
+    if not canonical and not work:
+        return {}
+    hooks = {}
+    for source in [canonical, work]:
+        for event, entries in source.items():
+            if event not in hooks:
+                hooks[event] = []
+            for entry in entries:
+                matcher = entry.get("matcher", "")
+                existing = next((e for e in hooks[event] if e.get("matcher") == matcher), None)
+                if existing is None:
+                    hooks[event].append(entry)
+                else:
+                    existing_cmds = {h.get("command") for h in existing.get("hooks", [])}
+                    for h in entry.get("hooks", []):
+                        if h.get("command") not in existing_cmds:
+                            existing["hooks"].append(h)
+    return hooks
+
+
+def load_json(path):
+    if path.exists():
+        with open(path) as f:
+            return json.load(f)
+    return {}
+
+
+def get_machine_type():
+    try:
+        import subprocess
+        result = subprocess.run(
+            ["chezmoi", "data", "--format=json"],
+            capture_output=True, text=True, timeout=5
+        )
+        if result.returncode == 0:
+            return json.loads(result.stdout).get("machine_type", "")
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, FileNotFoundError):
+        pass
+    return ""
+
+
+def main():
+    home = os.environ.get("HOME", str(Path.home()))
+    source_dir = os.environ.get("CHEZMOI_SOURCE_DIR", "")
+    machine_type = get_machine_type()
+
+    current = json.loads(sys.stdin.read() or "{}")
+
+    canonical_path = Path(source_dir) / ".chezmoitemplates" / "canonical_claude_settings.json"
+    with open(canonical_path) as f:
+        canonical = json.load(f)
+
+    work_dir = Path(home) / ".cache" / "claude-work-settings"
+    work = load_json(work_dir / "settings.json")
+    machine_specific = load_json(work_dir / f"{machine_type}.json") if machine_type else {}
+
+    # Deep merge: current < canonical < work < machine-specific
+    result = deep_merge(current, canonical)
+    result = deep_merge(result, work)
+    result = deep_merge(result, machine_specific)
+
+    # Merge hooks by concatenating (not replacing)
+    all_hooks = [canonical.get("hooks", {}), work.get("hooks", {}), machine_specific.get("hooks", {})]
+    merged_hooks = {}
+    for h in all_hooks:
+        if h:
+            merged_hooks = merge_hooks(merged_hooks, h)
+    if merged_hooks:
+        result["hooks"] = merged_hooks
+
+    # Union permissions from all sources, expanding $HOME before dedup
+    perms = set(current.get("permissions", {}).get("allow", []))
+    for source in [canonical, work, machine_specific]:
+        perms |= {expand_home(p, home) for p in source.get("permissions", {}).get("allow", [])}
+    result.setdefault("permissions", {})["allow"] = sorted(perms)
+
+    # Expand $HOME in the final output
+    out = json.dumps(result, indent=2, ensure_ascii=False).replace("$HOME", home)
+    out = out.replace("///", "//")
+    sys.stdout.write(out + "\n")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,119 @@
+{
+  "cleanupPeriodDays": 99999,
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "attribution": {
+    "pr": "🤖 Generated with Claude Code"
+  },
+  "model": "opus-latest[1m]",
+  "alwaysThinkingEnabled": true,
+  "skipWorkflowUsageWarning": true,
+  "permissions": {
+    "defaultMode": "plan",
+    "allow": [
+      "Bash($HOME/.claude/skills/transcript-search/scripts/search_transcripts.py \"PR skill\" -v --limit 20)",
+      "Bash($HOME/.claude/skills/transcript-search/scripts/search_transcripts.py \"commit\" \"PR skill\" -v --limit 20)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh search commits:*)",
+      "Bash(gh search:*)",
+      "Bash(git blame:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git diff:*)",
+      "Bash(git fetch:*)",
+      "Bash(git log:*)",
+      "Bash(git ls-remote:*)",
+      "Bash(git remote -v)",
+      "Bash(git rev-parse:*)",
+      "Bash(git shortlog:*)",
+      "Bash(git show:*)",
+      "Bash(git stash list:*)",
+      "Bash(git status:*)",
+      "Bash(git switch:*)",
+      "Bash(git tag:*)",
+      "Bash(grep:*)",
+      "Bash(openspec list:*)",
+      "Bash(python3 $HOME/.claude/skills/prometheus-metrics/scripts/cortex_query.py:*)",
+      "Read(//$HOME/.claude/plans/**)",
+      "Read(//$HOME/.claude/skills/prometheus-metrics/references/**)",
+      "Read(//$HOME/.claude/skills/prometheus-metrics/scripts/**)",
+      "Read(//$HOME/.claude/skills/tracing/references/**)",
+      "WebSearch",
+      "mcp__google__get_doc_content",
+      "mcp__google__get_events",
+      "mcp__google__get_gmail_messages_content_batch",
+      "mcp__google__google-get_doc_content",
+      "mcp__google__google-get_events",
+      "mcp__google__google-get_gmail_attachment_content",
+      "mcp__google__google-get_gmail_message_content",
+      "mcp__google__google-get_gmail_messages_content_batch",
+      "mcp__google__google-get_gmail_thread_content",
+      "mcp__google__google-get_gmail_threads_content_batch",
+      "mcp__google__google-get_presentation",
+      "mcp__google__google-get_spreadsheet_info",
+      "mcp__google__google-list_calendars",
+      "mcp__google__google-list_docs_in_folder",
+      "mcp__google__google-list_spreadsheets",
+      "mcp__google__google-read_sheet_values",
+      "mcp__google__google-search_docs",
+      "mcp__google__google-search_drive_files",
+      "mcp__google__google-search_gmail_messages",
+      "mcp__plugin_slack_slack__slack_read_channel",
+      "mcp__plugin_slack_slack__slack_read_thread",
+      "mcp__plugin_slack_slack__slack_read_user_profile",
+      "mcp__plugin_slack_slack__slack_search_channels",
+      "mcp__plugin_slack_slack__slack_search_public",
+      "mcp__plugin_slack_slack__slack_search_public_and_private",
+      "mcp__plugin_slack_slack__slack_search_users",
+      "mcp__things__get_anytime",
+      "mcp__things__get_areas",
+      "mcp__things__get_headings",
+      "mcp__things__get_inbox",
+      "mcp__things__get_logbook",
+      "mcp__things__get_projects",
+      "mcp__things__get_recent",
+      "mcp__things__get_someday",
+      "mcp__things__get_tagged_items",
+      "mcp__things__get_tags",
+      "mcp__things__get_today",
+      "mcp__things__get_todos",
+      "mcp__things__get_upcoming",
+      "mcp__things__search_items",
+      "mcp__things__search_todos"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "allowWrite": [
+        "~/.ssh/known_hosts"
+      ]
+    }
+  },
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/check-no-backslash-spaces.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

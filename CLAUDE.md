@@ -79,6 +79,28 @@ hostname -s
 
 On macOS, `ComputerName`, `LocalHostName`, `HostName`, and the shell hostname may differ.
 
+## Claude Settings Management
+
+`~/.claude/settings.json` is managed via a chezmoi `modify_` script that merges settings from two sources into whatever is on disk — it never clobbers local changes.
+
+Sources:
+- `home/.chezmoitemplates/canonical_claude_settings.json` — public/universal settings (plain text, this repo)
+- `~/.cache/claude-work-settings/settings.json` — work-specific settings (private repo, cloned locally)
+
+Key scripts:
+- `home/private_dot_claude/modify_settings.json` — the modify script (runs on `chezmoi apply`)
+
+Workflow: edit source files directly (canonical in this repo, work in the private repo), then `chezmoi apply` on each machine. Permissions are unioned from all sources so nothing is lost between applies.
+
+Path-based permissions use `$HOME` placeholder in source files, expanded at apply time.
+
+See `home/private_dot_claude/README.md` for full details.
+
+## Ghostty + tmux gotchas
+
+- **Clicking links in tmux**: Because `set -g mouse on` is enabled, tmux captures mouse events. To click hyperlinks (OSC 8 or auto-detected URLs) inside tmux, use **Cmd+Shift+click** — the Shift bypasses tmux's mouse capture so Ghostty can handle the click. Outside tmux, plain Cmd+click works.
+- **tmux terminal-features**: The tmux config declares `hyperlinks` in terminal-features so tmux forwards OSC 8 sequences to Ghostty. Changes to terminal-features require a full `tmux kill-server` restart (not just source-file).
+
 ## Testing Changes
 
 After modifying roles or tasks, run the playbook to verify changes. The playbook is idempotent and safe to run multiple times. Check for git repo status before running to avoid uncommitted changes being overwritten (the playbook checks this with `git rev-list "@{upstream}"...HEAD`).
