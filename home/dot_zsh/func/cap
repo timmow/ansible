@@ -1,0 +1,32 @@
+# cap - claude agent pick
+# Usage: cap            → fzf picker, prints selected agent id
+#        claude resume $(cap)
+
+local agents
+agents=$(claude agents --json 2>/dev/null) || { echo "Failed to get agents" >&2; return 1; }
+
+if [[ "$agents" == "[]" ]] || [[ -z "$agents" ]]; then
+  echo "No active agents" >&2
+  return 1
+fi
+
+local selected
+selected=$(
+  echo "$agents" | jq -r '
+    def reltime:
+      (now - ./1000) |
+      if . < 60 then "\(. | floor)s ago"
+      elif . < 3600 then "\(./60 | floor)m ago"
+      elif . < 86400 then "\(./3600 | floor)h ago"
+      else "\(./86400 | floor)d ago"
+      end;
+    def abbrev_cwd:
+      split("/") | if length > 2 then "…/" + (.[-2:] | join("/")) else join("/") end;
+    .[] |
+    "\(.id)\t[\(.state)] \(.name)  (\(.startedAt | reltime), \(.cwd | abbrev_cwd))"
+  ' | fzf --prompt="agent> " --header="Select a Claude agent" --delimiter="\t" --with-nth=2.. --preview-window=hidden
+)
+
+[[ -z "$selected" ]] && return
+
+echo "${selected%%$'\t'*}"
