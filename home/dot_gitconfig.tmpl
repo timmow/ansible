@@ -27,6 +27,8 @@
   rgrep = !git grep
   rg    = !rg
   fd    = !fd
+  # force-push that still refuses to clobber someone else's work
+  repush = push --force-with-lease --force-if-includes
   cleanup = "!git branch --merged master | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
 
 [interactive]
@@ -57,6 +59,9 @@
   prompt = false
 [push]
   default = simple
+  # refuse a --force-with-lease that would drop commits I fetched
+  # but never actually looked at (e.g. a reviewer's push)
+  useForceIfIncludes = true
 [gpg]
   format = ssh
 {{- if eq .machine_type "personal" }}
