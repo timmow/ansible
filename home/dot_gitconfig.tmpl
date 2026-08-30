@@ -8,9 +8,21 @@
   editor = nvr --remote-wait-silent
 [branch]
   autosetuprebase = always
+  # list most recently worked-on branches first
+  sort = -committerdate
 [rebase]
   autosquash = true
   autoStash = true
+[fetch]
+  # drop remote-tracking branches that have been deleted upstream
+  prune = true
+[rerere]
+  # remember how conflicts were resolved and reapply on the next rebase
+  enabled = true
+[diff]
+  algorithm = histogram
+[init]
+  defaultBranch = main
 [alias]
   rgrep = !git grep
   rg    = !rg
