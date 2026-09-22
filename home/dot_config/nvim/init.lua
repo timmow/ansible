@@ -179,37 +179,28 @@ end
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-local lspconfig = require 'lspconfig'
-local configs = require 'lspconfig.configs'
-
-if not configs.regols then
-  configs.regols = {
-    default_config = {
-      cmd = {'regols'};
-      filetypes = { 'rego' };
-      root_dir = lspconfig.util.root_pattern(".git");
-    }
-  }
-end
-lspconfig.regols.setup{}
-
-require('lspconfig')['pyright'].setup {
+-- Neovim 0.11+ LSP API; the require('lspconfig') framework is deprecated.
+-- nvim-lspconfig still supplies the per-server defaults via its lsp/*.lua files.
+vim.lsp.config('*', {
   capabilities = capabilities,
-}
+})
 
-require('lspconfig')['pylsp'].setup {
-  capabilities = capabilities,
-}
+vim.lsp.config('regols', {
+  cmd = { 'regols' },
+  filetypes = { 'rego' },
+  root_markers = { '.git' },
+})
 
-
-require('lspconfig')['jsonnet_ls'].setup {
+vim.lsp.config('jsonnet_ls', {
   on_attach = on_attach,
   cmd = {
     'jsonnet-language-server',
     '--tanka',
     '--eval-diag',
-    }
-  }
+  },
+})
+
+vim.lsp.enable({ 'regols', 'pyright', 'pylsp', 'jsonnet_ls' })
 require("trouble").setup {
   -- your configuration comes here
   -- or leave it empty to use the default settings
