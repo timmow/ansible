@@ -280,3 +280,7 @@ tags
 # End of https://www.toptal.com/developers/gitignore/api/osx,vim,python,terraform,visualstudiocode
 
 .aider*
+
+**/.claude/settings.local.json
+
+**/.claude/.cc-writes/
