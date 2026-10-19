@@ -10,7 +10,7 @@
   "alwaysThinkingEnabled": true,
   "skipWorkflowUsageWarning": true,
   "permissions": {
-    "defaultMode": "plan",
+    "defaultMode": "auto",
     "allow": [
       "Bash($HOME/.claude/skills/transcript-search/scripts/search_transcripts.py \"PR skill\" -v --limit 20)",
       "Bash($HOME/.claude/skills/transcript-search/scripts/search_transcripts.py \"commit\" \"PR skill\" -v --limit 20)",
