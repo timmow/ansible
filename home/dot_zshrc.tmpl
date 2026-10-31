@@ -39,10 +39,15 @@ export GOPATH=~/.go
 typeset -U path
 path=("${KREW_ROOT:-$HOME/.krew}/bin" "$HOME/.npm-prefix/bin" "$HOME/.local/bin" "$GOPATH/bin" "$HOME/bin" "/usr/local/sbin" "/usr/local/bin" $path)
 export PATH
+{{- $uv := eq (index . "python_manager" | default "pyenv") "uv" }}
+{{- if $uv }}
+plugins=(gitfast git brew zoxide tmux zsh-vim-mode fzf kubectl)
+{{- else }}
 plugins=(gitfast git brew zoxide tmux virtualenv zsh-vim-mode fzf kubectl)
+{{- end }}
 export CLICOLOR=1
 source $ZSH/oh-my-zsh.sh
-for ve in rbenv pyenv; do
+for ve in rbenv{{ if not $uv }} pyenv{{ end }}; do
     if type ${ve} &> /dev/null; then
         eval "$(${ve} init -)"
     fi

@@ -101,6 +101,10 @@ See `home/private_dot_claude/README.md` for full details.
 - **Clicking links in tmux**: Because `set -g mouse on` is enabled, tmux captures mouse events. To click hyperlinks (OSC 8 or auto-detected URLs) inside tmux, use **Cmd+Shift+click** — the Shift bypasses tmux's mouse capture so Ghostty can handle the click. Outside tmux, plain Cmd+click works.
 - **tmux terminal-features**: The tmux config declares `hyperlinks` in terminal-features so tmux forwards OSC 8 sequences to Ghostty. Changes to terminal-features require a full `tmux kill-server` restart (not just source-file).
 
+## TODO.md
+
+`TODO.md` at the repo root tracks known problems and in-progress migrations. Whenever you discover something that should be fixed but is out of scope for the current task (broken templates, stale docs, drifted clones, half-finished migrations), add it to `TODO.md` under a descriptive heading. Say what is wrong, why it matters, and the proposed fix. Update or remove an entry when the work is done or the entry becomes stale.
+
 ## Testing Changes
 
 After modifying roles or tasks, run the playbook to verify changes. The playbook is idempotent and safe to run multiple times. Check for git repo status before running to avoid uncommitted changes being overwritten (the playbook checks this with `git rev-list "@{upstream}"...HEAD`).
