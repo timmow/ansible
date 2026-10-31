@@ -84,11 +84,6 @@ uv now manages Python interpreters and CLI tools; pyenv is being phased out per 
 - Fix: either add `machine_type = "personal"` to each machine's local `[data]`, or add a `.chezmoi.toml.tmpl` that prompts for it (`promptStringOnce`).
 - The "Git signing on other machines" section above describes the older `signingHosts` allowlist and is now stale. Update it once `machine_type` is settled.
 
-## Repo clones out of sync
-
-- `~/src/ansible` is 11 commits behind `origin/master` and has uncommitted edits (`home/dot_zinitrc`, `home/dot_zshrc`, `roles/dotfiles/files/simple/zshenv`, plus an untracked `home/dot_zshrc.orig`).
-- Reconcile those edits into the chezmoi clone (or discard them), then `git pull`.
-
 ## Avoid bare `chezmoi apply`
 
 - A bare `chezmoi apply` also runs the `~/.claude/settings.json` modify script and touches every other managed file.
